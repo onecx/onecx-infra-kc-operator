@@ -1,0 +1,18 @@
+apiVersion: v2
+name: onecx-infra-kc-operator
+version: 0.0.0
+appVersion: 0.0.0
+description: onecx infra keycloak operator
+keywords:
+  - keycloak
+  - k8s
+sources:
+  - https://github.com/onecx/onecx-infra-kc-operator
+maintainers:
+  - name: Tkit Developer
+    email: tkit_dev@1000kit.org
+dependencies:
+  - name: helm-quarkus-app
+    alias: app
+    version: ^0
+    repository: oci://ghcr.io/onecx/charts

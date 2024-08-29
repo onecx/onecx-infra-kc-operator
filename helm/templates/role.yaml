@@ -1,0 +1,169 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ .Release.Name }}-{{ .Values.app.name }}-role
+  labels:
+{{ include "app.labels.common" $ | indent 4 }}
+rules:
+- apiGroups:
+  - "k8s.keycloak.org"
+  resources:
+  - "keycloaks"
+  - "keycloaks/status"
+  - "keycloaks/finalizers"
+  verbs:
+  - "get"
+  - "list"
+  - "watch"
+  - "patch"
+  - "update"
+  - "create"
+  - "delete"
+- apiGroups:
+  - ""
+  resources:
+  - "services"
+  verbs:
+  - "get"
+  - "list"
+  - "watch"
+  - "patch"
+  - "update"
+  - "delete"
+  - "create"
+- apiGroups:
+  - "apps"
+  resources:
+  - "statefulsets"
+  verbs:
+  - "get"
+  - "list"
+  - "watch"
+  - "patch"
+  - "update"
+  - "delete"
+  - "create"
+- apiGroups:
+  - ""
+  resources:
+  - "services"
+  verbs:
+  - "get"
+  - "list"
+  - "watch"
+  - "patch"
+  - "update"
+  - "delete"
+  - "create"
+- apiGroups:
+  - "networking.k8s.io"
+  resources:
+  - "ingresses"
+  verbs:
+  - "get"
+  - "list"
+  - "watch"
+  - "patch"
+  - "update"
+  - "delete"
+  - "create"
+- apiGroups:
+  - ""
+  resources:
+  - "secrets"
+  verbs:
+  - "get"
+  - "list"
+  - "watch"
+  - "delete"
+  - "create"
+  - "patch"
+- apiGroups:
+  - "k8s.keycloak.org"
+  resources:
+  - "keycloakrealmimports"
+  - "keycloakrealmimports/status"
+  - "keycloakrealmimports/finalizers"
+  verbs:
+  - "get"
+  - "list"
+  - "watch"
+  - "patch"
+  - "update"
+  - "create"
+  - "delete"
+- apiGroups:
+  - ""
+  resources:
+  - "secrets"
+  verbs:
+  - "get"
+  - "list"
+  - "watch"
+  - "patch"
+  - "update"
+  - "delete"
+  - "create"
+- apiGroups:
+  - "apps"
+  resources:
+  - "statefulsets"
+  verbs:
+  - "get"
+  - "list"
+  - "watch"
+  - "create"
+  - "delete"
+  - "patch"
+  - "update"
+- apiGroups:
+  - ""
+  resources:
+  - "configmaps"
+  verbs:
+  - "get"
+  - "list"
+  - "watch"
+- apiGroups:
+  - ""
+  resources:
+  - "secrets"
+  - "services"
+  verbs:
+  - "get"
+  - "list"
+  - "watch"
+  - "create"
+  - "delete"
+  - "patch"
+  - "update"
+- apiGroups:
+  - ""
+  resources:
+  - "pods"
+  verbs:
+  - "list"
+- apiGroups:
+  - "batch"
+  resources:
+  - "jobs"
+  verbs:
+  - "get"
+  - "list"
+  - "watch"
+  - "create"
+  - "delete"
+  - "patch"
+  - "update"
+- apiGroups:
+  - "networking.k8s.io"
+  resources:
+  - "ingresses"
+  verbs:
+  - "get"
+  - "list"
+  - "watch"
+  - "create"
+  - "delete"
+  - "patch"
+  - "update"

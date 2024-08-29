@@ -1,0 +1,77 @@
+app:
+  name: kc-operator
+  image:
+    registry: "quay.io"
+    repository: keycloak/keycloak-operator
+    tag: 25.0.4
+  env:
+    QUARKUS_BANNER_ENABLED: "false"
+    KC_OPERATOR_KEYCLOAK_IMAGE: "quay.io/keycloak/keycloak:25.0.4"
+    QUARKUS_OPERATOR_SDK_NAMESPACES: "JOSDK_WATCH_CURRENT"
+    QUARKUS_OPERATOR_SDK_CONTROLLERS_KEYCLOAKREALMIMPORTCONTROLLER_NAMESPACES: "JOSDK_WATCH_CURRENT"
+    QUARKUS_OPERATOR_SDK_CONTROLLERS_KEYCLOAKCONTROLLER_NAMESPACES: "JOSDK_WATCH_CURRENT"
+  envCustom:
+    - name: KUBERNETES_NAMESPACE
+      valueFrom:
+        fieldRef:
+          fieldPath: metadata.namespace
+  serviceAccount:
+    enabled: true
+
+  operator:
+    microservice:
+      enabled: false
+
+# keycloak configuration    
+keycloak:
+  # Enable or disable keycloak instance
+  enabled: false
+  # name of the instance
+  name: keycloak
+
+  # Database setup
+  db:
+    # database host name
+    host:
+    # database user
+    user: 
+    # database password
+    password: 
+    # database schema
+    database: 
+    # database port
+    port: 5432
+    
+    # onecx database operator
+    operator:
+      # enabled or disable onecx databsource operator resource
+      enabled: true
+
+  # Route
+  routing:
+    # Enable or disable route
+    enabled: false
+
+    # Default URL
+    default_url: "change.com"
+
+    # modified chart name for ingress
+    name: keycloak
+
+    # ingress
+    ingress:
+      # host configuration
+      host:
+        # prio1 if the name is define generate domain <override>.<default_url>
+        override :
+        # prio2 if the name is define generate domain <name>-<release_namespace>.<default_url>
+        name:
+        # else <release_name>-<name of chart_name>-<release_namespace>.<default_url>
+  # keycloak import
+  import:
+    # keycloak realm import
+    realm:
+      # enable or disable realm import
+      enabled: false
+      # import realm data. Export realm convert to yaml and put it here
+      data:
