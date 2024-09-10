@@ -1,0 +1,23 @@
+app:
+  name: kc-operator
+  image:
+    registry: "quay.io"
+    repository: keycloak/keycloak-operator
+    tag: 25.0.4
+  env:
+    QUARKUS_BANNER_ENABLED: "false"
+    KC_OPERATOR_KEYCLOAK_IMAGE: "quay.io/keycloak/keycloak:25.0.4"
+    QUARKUS_OPERATOR_SDK_NAMESPACES: "JOSDK_WATCH_CURRENT"
+    QUARKUS_OPERATOR_SDK_CONTROLLERS_KEYCLOAKREALMIMPORTCONTROLLER_NAMESPACES: "JOSDK_WATCH_CURRENT"
+    QUARKUS_OPERATOR_SDK_CONTROLLERS_KEYCLOAKCONTROLLER_NAMESPACES: "JOSDK_WATCH_CURRENT"
+  envCustom:
+    - name: KUBERNETES_NAMESPACE
+      valueFrom:
+        fieldRef:
+          fieldPath: metadata.namespace
+  serviceAccount:
+    enabled: true
+
+  operator:
+    microservice:
+      enabled: false
