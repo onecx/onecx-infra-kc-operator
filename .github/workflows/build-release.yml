@@ -10,6 +10,12 @@ jobs:
     with:
       templateValuesYaml: ''
       templateReleaseValuesYaml: ''
+  helm-event:
+    uses: onecx/ci-product/.github/workflows/helm-send-event.yml@v1
+    needs: helm
+    secrets: inherit
+    with:
+      targetRepository: onecx/onecx-infra
   changelog:
     uses: onecx/ci-common/.github/workflows/generate-changelog.yml@v1
     needs: helm
